@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "mc_colosseum",
+  "version": "${version}",
+
+  "name": "Minecraft Colosseum",
+  "description": "This is a Minecraft 1.19 mod that adds in Colosseums structures where you can test your strength against bosses in front of a crowd for a reward.",
+  "authors": [
+    "The Changer"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "GPL-3.0 License",
+  "icon": "assets/mc_colosseum/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.the_changer.mc_colosseum.MC_Colosseum"
+    ]
+  },
+  "mixins": [
+    "mc_colosseum.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
