@@ -1,4 +1,6 @@
 package com.the_changer.mc_colosseum;
+
+import com.the_changer.mc_colosseum.block.ModBlocks;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,8 @@ public class MC_Colosseum implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Hello Fabric world that hates me :(");
+		LOGGER.info("Hello Fabric world");
+		//register the items blocks, and structures
+		ModBlocks.registerModBlocks();
 	}
 }

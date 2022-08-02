@@ -1,0 +1,6 @@
+{
+  "parent": "mc_colosseum:block/button_pressed",
+  "textures": {
+    "texture": "mc_colosseum:colosseum_planks"
+  }
+}
