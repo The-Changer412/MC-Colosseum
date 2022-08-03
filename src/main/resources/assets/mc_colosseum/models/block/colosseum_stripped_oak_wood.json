@@ -1,0 +1,7 @@
+{
+  "parent": "mc_colosseum:block/cube_column",
+  "textures": {
+    "end": "mc_colosseum:colosseum_stripped_oak_log",
+    "side": "mc_colosseum:colosseum_stripped_oak_log"
+  }
+}
