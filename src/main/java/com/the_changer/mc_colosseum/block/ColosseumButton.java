@@ -3,20 +3,16 @@ package com.the_changer.mc_colosseum.block;
 import com.the_changer.mc_colosseum.MC_Colosseum;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.WoodenButtonBlock;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.logging.Logger;
 
 public class ColosseumButton extends WoodenButtonBlock {
     public ColosseumButton(Settings settings) {
@@ -92,6 +88,16 @@ class PlayerCDandTP extends Thread {
                             player.sendMessage(Text.of("FIGHT!!!"), false);
                             player.teleport(x, y+1, z);
                         }
+
+                        //give the player there weapon, food, shield, and armor.
+                        player.getInventory().clear();
+                        player.getInventory().setStack(0, new ItemStack(Items.WOODEN_SWORD));
+                        player.getInventory().setStack(1, new ItemStack(Items.COOKED_BEEF, 64));
+                        player.getInventory().offHand.set(0, new ItemStack(Items.SHIELD));
+                        player.getInventory().armor.set(3, new ItemStack(Items.LEATHER_HELMET));
+                        player.getInventory().armor.set(2, new ItemStack(Items.LEATHER_CHESTPLATE));
+                        player.getInventory().armor.set(1, new ItemStack(Items.LEATHER_LEGGINGS));
+                        player.getInventory().armor.set(0, new ItemStack(Items.LEATHER_BOOTS));
                     }
                 }
             }
