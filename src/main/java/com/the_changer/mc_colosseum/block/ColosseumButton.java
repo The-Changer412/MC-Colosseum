@@ -34,7 +34,8 @@ public class ColosseumButton extends WoodenButtonBlock {
                     player.sendMessage(Text.of("Empty everything inside your inventory and set your spawn point before pressing the button."), false);
                 } else {
                     //prepare the player that the fights will start soon.
-                    player.sendMessage(Text.of("Get ready. The fight will start soon."), false);
+                    player.sendMessage(Text.of("DON'T MOVE A MUSCLE. The fight will start soon, and moving could cause you to miss the opportunity to fight."), false);
+                    player.sendMessage(Text.of("Also, Don't try to smuggle a item into the fight. You will lose the item."), false);
                     //jammed the button, so it can't be pressed again.
                     world.setBlockState(pos, state.with(ColosseumButton.POWERED, true), NOTIFY_ALL);
 
@@ -92,7 +93,7 @@ class PlayerCDandTP extends Thread {
                         //give the player there weapon, food, shield, and armor.
                         player.getInventory().clear();
                         player.getInventory().setStack(0, new ItemStack(Items.WOODEN_SWORD));
-                        player.getInventory().setStack(1, new ItemStack(Items.COOKED_BEEF, 64));
+                        player.getInventory().setStack(1, new ItemStack(Items.COOKED_BEEF, 2));
                         player.getInventory().offHand.set(0, new ItemStack(Items.SHIELD));
                         player.getInventory().armor.set(3, new ItemStack(Items.LEATHER_HELMET));
                         player.getInventory().armor.set(2, new ItemStack(Items.LEATHER_CHESTPLATE));
