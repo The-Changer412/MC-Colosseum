@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mccolosseum:block/colosseum_stripped_oak_wood"
+    },
+    "facing=south": {
+      "model": "mccolosseum:block/colosseum_stripped_oak_wood",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mccolosseum:block/colosseum_stripped_oak_wood",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "mccolosseum:block/colosseum_stripped_oak_wood",
+      "y": 90
+    }
+  }
+}

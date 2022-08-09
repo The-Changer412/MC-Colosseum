@@ -1,4 +1,4 @@
-package com.the_changer.mc_colosseum.block;
+package com.the_changer.mccolosseum.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

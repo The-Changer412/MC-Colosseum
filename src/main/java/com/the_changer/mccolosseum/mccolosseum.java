@@ -1,13 +1,13 @@
-package com.the_changer.mc_colosseum;
+package com.the_changer.mccolosseum;
 
-import com.the_changer.mc_colosseum.block.ModBlocks;
+import com.the_changer.mccolosseum.block.ModBlocks;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MC_Colosseum implements ModInitializer {
+public class mccolosseum implements ModInitializer {
 	//save the mod id for easy access
-	public static final String MOD_ID = "mc_colosseum";
+	public static final String MOD_ID = "mccolosseum";
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.

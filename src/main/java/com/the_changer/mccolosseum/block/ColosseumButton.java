@@ -1,6 +1,6 @@
-package com.the_changer.mc_colosseum.block;
+package com.the_changer.mccolosseum.block;
 
-import com.the_changer.mc_colosseum.MC_Colosseum;
+import com.the_changer.mccolosseum.mccolosseum;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WoodenButtonBlock;
@@ -103,7 +103,7 @@ class PlayerCDandTP extends Thread {
                 }
             }
         } catch (InterruptedException e) {
-            MC_Colosseum.LOGGER.warn(e.getLocalizedMessage());
+            mccolosseum.LOGGER.warn(e.getLocalizedMessage());
         }
     }
 }

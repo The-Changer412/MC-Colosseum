@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "mc_colosseum",
+  "id": "mccolosseum",
   "version": "${version}",
 
   "name": "Minecraft Colosseum",
@@ -14,16 +14,16 @@
   },
 
   "license": "GPL-3.0 License",
-  "icon": "assets/mc_colosseum/icon.png",
+  "icon": "assets/mccolosseum/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.the_changer.mc_colosseum.MC_Colosseum"
+      "com.the_changer.mccolosseum.mccolosseum"
     ]
   },
   "mixins": [
-    "mc_colosseum.mixins.json"
+    "mccolosseum.mixins.json"
   ],
 
   "depends": {

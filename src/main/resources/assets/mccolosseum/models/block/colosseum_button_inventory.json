@@ -1,0 +1,6 @@
+{
+  "parent": "mccolosseum:block/button_inventory",
+  "textures": {
+    "texture": "mccolosseum:colosseum_planks"
+  }
+}
