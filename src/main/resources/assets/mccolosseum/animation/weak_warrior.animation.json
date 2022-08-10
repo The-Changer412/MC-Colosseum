@@ -1,14 +1,14 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"WeakWarrior.Idle": {
+		"weak_warrior.idle": {
 			"loop": true
 		},
-		"WeakWarrior.Walk": {
+		"weak_warrior.walk": {
 			"loop": true,
 			"animation_length": 1.33333,
 			"bones": {
-				"RLeg": {
+				"r_leg": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -33,7 +33,7 @@
 						}
 					}
 				},
-				"LLeg": {
+				"l_leg": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -58,7 +58,7 @@
 						}
 					}
 				},
-				"LArm": {
+				"l_arm": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -83,7 +83,7 @@
 						}
 					}
 				},
-				"RArm": {
+				"r_arm": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -110,10 +110,10 @@
 				}
 			}
 		},
-		"WeakWarrior.Attack": {
+		"weak_warrior.attack": {
 			"animation_length": 0.66667,
 			"bones": {
-				"LArm": {
+				"l_arm": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
