@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.the_changer.mccolosseum.mccolosseum"
+    ],
+    "client": [
+      "com.the_changer.mccolosseum.TutorialClientMod"
     ]
   },
   "mixins": [

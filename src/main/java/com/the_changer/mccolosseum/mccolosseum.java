@@ -1,9 +1,11 @@
 package com.the_changer.mccolosseum;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
+import com.the_changer.mccolosseum.utli.ModRegistries;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.bernie.geckolib3.GeckoLib;
 
 public class mccolosseum implements ModInitializer {
 	//save the mod id for easy access
@@ -23,5 +25,7 @@ public class mccolosseum implements ModInitializer {
 		LOGGER.info("Hello Fabric world");
 		//register the items blocks, and structures
 		ModBlocks.registerModBlocks();
+		ModRegistries.registerModStuffs();
+		GeckoLib.initialize();
 	}
 }
