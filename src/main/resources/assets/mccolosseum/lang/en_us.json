@@ -1,4 +1,5 @@
 {
   "block.mccolosseum.colosseum_button": "Colosseum Button",
-  "block.mccolosseum.colosseum_stripped_oak_wood": "Colosseum Stripped Oak Wood"
+  "block.mccolosseum.colosseum_stripped_oak_wood": "Colosseum Stripped Oak Wood",
+  "entity.mccolosseum.weakwarrior": "Weak Warrior"
 }

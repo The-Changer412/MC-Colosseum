@@ -23,8 +23,10 @@ public class mccolosseum implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world");
-		//register the items blocks, and structures
+		//register the items blocks
 		ModBlocks.registerModBlocks();
+
+		//register the entites and the library that handles animations
 		ModRegistries.registerModStuffs();
 		GeckoLib.initialize();
 	}

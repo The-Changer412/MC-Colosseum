@@ -1,7 +1,7 @@
 package com.the_changer.mccolosseum.utli;
 
-import com.the_changer.mccolosseum.entity.ModEntities;
-import com.the_changer.mccolosseum.entity.custom.RaccoonEntity;
+import com.the_changer.mccolosseum.entities.ModEntities;
+import com.the_changer.mccolosseum.entities.entity.WeakWarriorEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
 public class ModRegistries {
@@ -10,6 +10,6 @@ public class ModRegistries {
     }
 
     private static void registerAttributes() {
-        FabricDefaultAttributeRegistry.register(ModEntities.RACCOON, RaccoonEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.WEAKWARRIOR, WeakWarriorEntity.setAttributes());
     }
 }

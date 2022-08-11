@@ -1,4 +1,4 @@
-package com.the_changer.mccolosseum.entity.custom;
+package com.the_changer.mccolosseum.entities.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -23,10 +23,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RaccoonEntity extends AnimalEntity implements IAnimatable {
+public class WeakWarriorEntity extends AnimalEntity implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
 
-    public RaccoonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public WeakWarriorEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -54,11 +54,11 @@ public class RaccoonEntity extends AnimalEntity implements IAnimatable {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.raccoon.walk", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.walk", true));
             return PlayState.CONTINUE;
         }
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.raccoon.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.idle", true));
         return PlayState.CONTINUE;
     }
 
