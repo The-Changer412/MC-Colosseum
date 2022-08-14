@@ -8,9 +8,11 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class WeakWarriorRenderer extends GeoEntityRenderer<WeakWarriorEntity> {
     public WeakWarriorRenderer(EntityRendererFactory.Context ctx) {
+
         super(ctx, new WeakWarriorModel());
     }
 
+    //point the entity to the texture file
     @Override
     public Identifier getTextureResource(WeakWarriorEntity instance) {
         return new Identifier(mccolosseum.MOD_ID, "textures/weak_warrior.png");

@@ -9,6 +9,7 @@ public class ModRegistries {
         registerAttributes();
     }
 
+    //register the attributes for the entities
     private static void registerAttributes() {
         FabricDefaultAttributeRegistry.register(ModEntities.WEAKWARRIOR, WeakWarriorEntity.setAttributes());
     }

@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModEntities {
+    //register the weak warrior entity
     public static final EntityType<WeakWarriorEntity> WEAKWARRIOR = Registry.register(
             Registry.ENTITY_TYPE, new Identifier(mccolosseum.MOD_ID, "weakwarrior"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, WeakWarriorEntity::new)
