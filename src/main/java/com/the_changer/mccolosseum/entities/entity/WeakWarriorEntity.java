@@ -15,6 +15,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -25,7 +26,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
-
+    public boolean attacked = false;
     public WeakWarriorEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -34,39 +35,61 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 20f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.5f)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1f)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0f);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3f)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4f)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 150f);
     }
 
-    //set the ai for the entity
+    //set the AI for the entity
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new MeleeAttackGoal(this, this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_SPEED), false));
+        this.goalSelector.add(1, new MeleeAttackGoal(this, this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_SPEED), true));
         this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, true));
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
     }
 
-    //make the animation state machine
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+    //make the animation state machine for movement
+    private <E extends IAnimatable> PlayState movePredicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.walk", true));
-            event.getController().setAnimationSpeed(1.6f);
-            return PlayState.CONTINUE;
+            event.getController().setAnimationSpeed(1.5f);
+            attacked = false;
         } else {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.idle", true));
             event.getController().setAnimationSpeed(1f);
-            return PlayState.CONTINUE;
+        }
+        return PlayState.CONTINUE;
+    }
+
+    //make the animation state machine for attacks
+    private <E extends IAnimatable> PlayState attackPredicate(AnimationEvent<E> event) {
+        PlayerEntity player = this.world.getClosestPlayer(this, 100);
+        if (player != null) {
+            double dis = this.getBlockPos().getSquaredDistance(player.getPos());
+            if (dis < 3.75 && !attacked) {
+                if (event.getController().getAnimationState() == AnimationState.Stopped) {
+                    event.getController().markNeedsReload();
+                }
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.attack", false));
+                event.getController().setAnimationSpeed(1.85f);
+                attacked = true;
+                return PlayState.CONTINUE;
+            } else {
+                return  PlayState.STOP;
+            }
+        } else {
+            return  PlayState.STOP;
         }
     }
 
     //assign the state machine to the entity
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this, "controller",
-                0, this::predicate));
+        animationData.addAnimationController(new AnimationController(this, "movecontroller", 0, this::movePredicate));
+        animationData.addAnimationController(new AnimationController(this, "attackcontroller", 0, this::attackPredicate));
     }
 
     //make it only target the player
@@ -76,11 +99,6 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
         } else {
             return false;
         }
-    }
-
-    @Override
-    public void tickMovement() {
-        super.tickMovement();
     }
 
     @Override
