@@ -1,18 +1,29 @@
 package com.the_changer.mccolosseum.entities.entity;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
+import com.the_changer.mccolosseum.mccolosseum;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.BossBarHud;
+import net.minecraft.client.gui.hud.ClientBossBar;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.boss.ServerBossBar;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.packet.s2c.play.BossBarS2CPacket;
+import net.minecraft.server.command.BossBarCommand;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.AnimationState;
@@ -24,22 +35,30 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.List;
+import java.util.UUID;
+
 public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
     public boolean attacked = false;
+    private static final UUID BBUUID = UUID.randomUUID();
+    public ServerBossBar BB = null;
+
+
     public WeakWarriorEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
+        BB = new ServerBossBar(this.getName(), BossBar.Color.WHITE, BossBar.Style.PROGRESS);
     }
 
     //set the stats for the entity
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20f)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 45f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 150f);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 200f);
     }
 
     //set the AI for the entity
@@ -99,6 +118,37 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        //set the boss bar of the boss
+        if (!this.world.isClient) {
+            if (!this.dead) {
+//                this.getServer().getPlayerManager().getPlayerList().forEach(serverPlayerEntity -> BB.addPlayer(serverPlayerEntity));
+
+                //only let ppl close to the boss see the health bar
+                List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
+                for (ServerPlayerEntity player : Players) {
+                    double dis = this.getBlockPos().getSquaredDistance(player.getPos());
+                    if (dis < this.getAttributeBaseValue(EntityAttributes.GENERIC_FOLLOW_RANGE) + 10000) {
+                        BB.addPlayer(player);
+                    } else {
+                        BB.removePlayer(player);
+                    }
+                }
+                //set the stats of the boss bar
+                BB.setPercent(this.getHealth()/this.getMaxHealth());
+                BB.setColor(BossBar.Color.RED);
+                BB.setDarkenSky(true);
+                BB.setVisible(true);
+            } else {
+                BB.clearPlayers();
+            }
+        }
+
     }
 
     @Override
