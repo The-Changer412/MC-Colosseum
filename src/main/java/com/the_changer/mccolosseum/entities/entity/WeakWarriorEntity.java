@@ -1,12 +1,8 @@
 package com.the_changer.mccolosseum.entities.entity;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
-import com.the_changer.mccolosseum.mccolosseum;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.hud.BossBarHud;
-import net.minecraft.client.gui.hud.ClientBossBar;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -18,13 +14,12 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.BossBarS2CPacket;
-import net.minecraft.server.command.BossBarCommand;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -55,7 +50,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 45f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.5f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 200f);
@@ -133,7 +128,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
                 List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
                 for (ServerPlayerEntity player : Players) {
                     double dis = this.getBlockPos().getSquaredDistance(player.getPos());
-                    if (dis < this.getAttributeBaseValue(EntityAttributes.GENERIC_FOLLOW_RANGE) + 10000) {
+                    if (dis < 10000) {
                         BB.addPlayer(player);
                     } else {
                         BB.removePlayer(player);
@@ -149,6 +144,17 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
             }
         }
 
+    }
+
+    //set the amount of xp it drops
+    @Override
+    public int getXpToDrop() {
+        return  this.random.nextBetween(80, 100);
+    }
+
+    //make it not despawn
+    public void checkDespawn() {
+        this.despawnCounter = 0;
     }
 
     @Override
