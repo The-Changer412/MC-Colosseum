@@ -19,6 +19,9 @@ public class ModBlocks {
 
     public static final Block Colosseum_Stripped_Oak_Wood = registerBlock("colosseum_stripped_oak_wood",
             new RotateBlock(FabricBlockSettings.of(Material.DECORATION)), null);
+    public static final Block Colosseum_Stripped_Oak_Wood_Enemy = registerBlock("colosseum_stripped_oak_wood_enemy",
+            new RotateBlock(FabricBlockSettings.of(Material.DECORATION)), null);
+
 
     //register a new block item
     private static Item registerBlockItem(String name, Block block, ItemGroup group){

@@ -3,6 +3,8 @@ package com.the_changer.mccolosseum.entities.entity;
 import com.the_changer.mccolosseum.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -12,12 +14,14 @@ import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
@@ -38,8 +42,6 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     public boolean attacked = false;
     private static final UUID BBUUID = UUID.randomUUID();
     public ServerBossBar BB = null;
-
-
     public WeakWarriorEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         BB = new ServerBossBar(this.getName(), BossBar.Color.WHITE, BossBar.Style.PROGRESS);
@@ -48,9 +50,9 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     //set the stats for the entity
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 45f)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.5f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 200f);
@@ -122,8 +124,6 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
         //set the boss bar of the boss
         if (!this.world.isClient) {
             if (!this.dead) {
-//                this.getServer().getPlayerManager().getPlayerList().forEach(serverPlayerEntity -> BB.addPlayer(serverPlayerEntity));
-
                 //only let ppl close to the boss see the health bar
                 List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
                 for (ServerPlayerEntity player : Players) {
@@ -146,15 +146,21 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
 
     }
 
-    //set the amount of xp it drops
-    @Override
-    public int getXpToDrop() {
-        return  this.random.nextBetween(80, 100);
-    }
-
     //make it not despawn
     public void checkDespawn() {
         this.despawnCounter = 0;
+    }
+
+    //set the amount of xp it drops
+    @Override
+    public int getXpToDrop() {return  this.random.nextBetween(80, 100);}
+
+    @Override
+    public void remove(Entity.RemovalReason reason) {
+        if (!this.world.isClient && this.isDead()) {
+            this.getServer().sendMessage(Text.of("This is the part where the announcer talks, but he doesn't exists yet."));
+        }
+        super.remove(reason);
     }
 
     @Override
