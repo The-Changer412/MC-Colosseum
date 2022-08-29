@@ -2,26 +2,15 @@ package com.the_changer.mccolosseum.utli;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
 import com.the_changer.mccolosseum.entities.ModEntities;
-import com.the_changer.mccolosseum.entities.entity.WeakWarriorEntity;
 import com.the_changer.mccolosseum.mccolosseum;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.server.command.SummonCommand;
-import net.minecraft.server.command.TeleportCommand;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 //the thread that will do the countdown and teleport the player inside the event
 public class PlayerCDandTP extends Thread {
@@ -32,21 +21,30 @@ public class PlayerCDandTP extends Thread {
     boolean found = false;
 
     public PlayerCDandTP(PlayerEntity Player, World World) {
-
         player = Player;
         world = World;
     }
 
     public void run() {
         try {
-            //do the countdown
+            int range = 1500;
+            //make the announcer talk to the player
             Thread.sleep(3000);
-            player.sendMessage(Text.of("3"), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: Welcome to today's fight.");
             Thread.sleep(1000);
-            player.sendMessage(Text.of("2"), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: On the left side of the colosseum, we have some random player that volunteer himself to die for your entertainment.");
+            Thread.sleep(2200);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: And on the right side of the colosseum, we have one a strong warrior that will easily kill the player.");
+            Thread.sleep(2000);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: This is a fight that you do not want to miss.");
+            Thread.sleep(1200);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: Release the Fighters in 3...");
             Thread.sleep(1000);
-            player.sendMessage(Text.of("1"), false);
+            player.sendMessage(Text.of("Announcer: 2..."), false);
             Thread.sleep(1000);
+            player.sendMessage(Text.of("Announcer: 1..."), false);
+            Thread.sleep(1000);
+
 
             BlockCheckRange = 120;
             found = false;
@@ -55,7 +53,6 @@ public class PlayerCDandTP extends Thread {
                     for (int z = player.getBlockZ() - BlockCheckRange; z < player.getBlockZ() + BlockCheckRange; z++) {
                         //spawn the enemy at the block
                         Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
-                        this.world.getServer().sendMessage(Text.of(String.valueOf(new BlockPos(x, y, z))));
                         if (block == ModBlocks.Colosseum_Stripped_Oak_Wood_Enemy) {
                             ModEntities.WEAKWARRIOR.spawn(this.world.getServer().getWorld(this.world.getRegistryKey()),  null, null, null, new BlockPos(x, y+1, z), SpawnReason.TRIGGERED, true, true);
                             found = true;
@@ -89,7 +86,7 @@ public class PlayerCDandTP extends Thread {
                             player.getInventory().armor.set(1, new ItemStack(Items.LEATHER_LEGGINGS));
                             player.getInventory().armor.set(0, new ItemStack(Items.LEATHER_BOOTS));
 
-                            player.sendMessage(Text.of("FIGHT!!!"), false);
+                            player.sendMessage(Text.of("Announcer: FIGHT!!!"), false);
                             found = true;
                             break;
                         }

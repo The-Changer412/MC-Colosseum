@@ -1,6 +1,8 @@
 package com.the_changer.mccolosseum.entities.entity;
 
+import com.eliotlash.mclib.math.functions.limit.Min;
 import com.the_changer.mccolosseum.block.ModBlocks;
+import com.the_changer.mccolosseum.utli.RoundTwoThread;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -157,10 +159,28 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
 
     @Override
     public void remove(Entity.RemovalReason reason) {
-        if (!this.world.isClient && this.isDead()) {
-            this.getServer().sendMessage(Text.of("This is the part where the announcer talks, but he doesn't exists yet."));
-        }
         super.remove(reason);
+        //start the thread for the second round after the boss's death
+        if (this.isDead() && !this.world.isClient) {
+//            double ClosestDis = 999999999;
+//            ServerPlayerEntity ClosestPlayer = null;
+//
+//            List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
+//            for (ServerPlayerEntity player : Players) {
+//                double dis = this.getBlockPos().getSquaredDistance(player.getPos());
+//                if (dis < ClosestDis) {
+//                    ClosestDis = dis;
+//                    ClosestPlayer = player;
+//                }
+//            }
+
+            PlayerEntity player = this.world.getClosestPlayer(this, 100);
+            RoundTwoThread Thread = new RoundTwoThread(
+                    player,
+                    this.getServer().getWorld(this.world.getRegistryKey())
+            );
+            Thread.run();
+        }
     }
 
     @Override
