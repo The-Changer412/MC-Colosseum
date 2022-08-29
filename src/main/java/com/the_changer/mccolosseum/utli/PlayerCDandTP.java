@@ -40,9 +40,9 @@ public class PlayerCDandTP extends Thread {
             Thread.sleep(1200);
             UsefulFunctions.TalkToEveryone(player, "Announcer: Release the Fighters in 3...");
             Thread.sleep(1000);
-            player.sendMessage(Text.of("Announcer: 2..."), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: 2...");
             Thread.sleep(1000);
-            player.sendMessage(Text.of("Announcer: 1..."), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: 1...");
             Thread.sleep(1000);
 
 
@@ -76,7 +76,7 @@ public class PlayerCDandTP extends Thread {
                         if (block == ModBlocks.Colosseum_Stripped_Oak_Wood) {
                             player.teleport(x, y + 1, z);
 
-                            //give the player there weapon, food, shield, and armor.
+                            //give the player there weapon, food, shield, armor, and reset their stats.
                             player.getInventory().clear();
                             player.getInventory().setStack(0, new ItemStack(Items.WOODEN_SWORD));
                             player.getInventory().setStack(1, new ItemStack(Items.COOKED_BEEF, 2));
@@ -86,7 +86,13 @@ public class PlayerCDandTP extends Thread {
                             player.getInventory().armor.set(1, new ItemStack(Items.LEATHER_LEGGINGS));
                             player.getInventory().armor.set(0, new ItemStack(Items.LEATHER_BOOTS));
 
-                            player.sendMessage(Text.of("Announcer: FIGHT!!!"), false);
+                            player.clearStatusEffects();
+                            player.heal(30);
+                            player.getHungerManager().setFoodLevel(30);
+                            player.getHungerManager().setSaturationLevel(30);
+                            player.getHungerManager().setFoodLevel(30);
+
+                            UsefulFunctions.TalkToEveryone(player, "Announcer: FIGHT!!!");
                             found = true;
                             break;
                         }

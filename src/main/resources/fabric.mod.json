@@ -22,7 +22,7 @@
       "com.the_changer.mccolosseum.mccolosseum"
     ],
     "client": [
-      "com.the_changer.mccolosseum.TutorialClientMod"
+      "com.the_changer.mccolosseum.mccolosseumClient"
     ]
   },
   "mixins": [

@@ -36,17 +36,16 @@ public class RoundTwoThread extends Thread {
             Thread.sleep(2000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: We just call him strong to scare the player away.");
             Thread.sleep(2000);
-
-            //give the player there weapon, food, shield, and armor.
-            player.getInventory().clear();
-            player.getInventory().setStack(0, new ItemStack(Items.STONE_SWORD));
-            player.getInventory().setStack(1, new ItemStack(Items.COOKED_BEEF, 4));
-            player.getInventory().offHand.set(0, new ItemStack(Items.SHIELD));
-            player.getInventory().armor.set(3, new ItemStack(Items.CHAINMAIL_HELMET));
-            player.getInventory().armor.set(2, new ItemStack(Items.CHAINMAIL_CHESTPLATE));
-            player.getInventory().armor.set(1, new ItemStack(Items.CHAINMAIL_LEGGINGS));
-            player.getInventory().armor.set(0, new ItemStack(Items.CHAINMAIL_BOOTS));
-
+            UsefulFunctions.TalkToEveryone(player, "Announcer: Hopefully, the next guy can scare you away with his strength.");
+            Thread.sleep(2000);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: Or kill you. That also works.");
+            Thread.sleep(2000);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: Anyway, Let the next fight begin in 3...");
+            Thread.sleep(2000);
+            player.sendMessage(Text.of("Announcer: 2..."), false);
+            Thread.sleep(1000);
+            player.sendMessage(Text.of("Announcer: 1..."), false);
+            Thread.sleep(1000);
 
             int BlockCheckRange = 120;
             boolean found = false;
@@ -56,9 +55,7 @@ public class RoundTwoThread extends Thread {
                         //spawn the enemy at the block
                         Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
                         if (block == ModBlocks.Colosseum_Stripped_Oak_Wood_Enemy) {
-
-                            
-
+                            ModEntities.STABBYMCSTABBY.spawn(this.world.getServer().getWorld(this.world.getRegistryKey()),  null, null, null, new BlockPos(x, y+1, z), SpawnReason.TRIGGERED, true, true);
                             found = true;
                             break;
                         }
@@ -67,6 +64,24 @@ public class RoundTwoThread extends Thread {
                 }
                 if (found) {break;}
             }
+
+            //give the player there weapon, food, shield, armor, and reset their stats.
+            player.getInventory().clear();
+            player.getInventory().setStack(0, new ItemStack(Items.STONE_SWORD));
+            player.getInventory().setStack(1, new ItemStack(Items.COOKED_BEEF, 4));
+            player.getInventory().offHand.set(0, new ItemStack(Items.SHIELD));
+            player.getInventory().armor.set(3, new ItemStack(Items.CHAINMAIL_HELMET));
+            player.getInventory().armor.set(2, new ItemStack(Items.CHAINMAIL_CHESTPLATE));
+            player.getInventory().armor.set(1, new ItemStack(Items.CHAINMAIL_LEGGINGS));
+            player.getInventory().armor.set(0, new ItemStack(Items.CHAINMAIL_BOOTS));
+
+            player.clearStatusEffects();
+            player.heal(30);
+            player.getHungerManager().setFoodLevel(30);
+            player.getHungerManager().setSaturationLevel(30);
+            player.getHungerManager().setFoodLevel(30);
+
+            UsefulFunctions.TalkToEveryone(player, "Announcer: FIGHT!!!");
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
