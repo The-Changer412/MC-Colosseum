@@ -1,5 +1,6 @@
 package com.the_changer.mccolosseum.entities;
 
+import com.the_changer.mccolosseum.entities.entity.Hammer_Lover9000Entity;
 import com.the_changer.mccolosseum.entities.entity.StabbyMcstabbyEntity;
 import com.the_changer.mccolosseum.entities.entity.WeakWarriorEntity;
 import com.the_changer.mccolosseum.mccolosseum;
@@ -20,5 +21,10 @@ public class ModEntities {
     public static final EntityType<StabbyMcstabbyEntity> STABBYMCSTABBY = Registry.register(
             Registry.ENTITY_TYPE, new Identifier(mccolosseum.MOD_ID, "stabbymcstabby"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, StabbyMcstabbyEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.7f, 2.25f)).build());
+                    .dimensions(EntityDimensions.fixed(0.7f, 2.18f)).build());
+
+    public static final EntityType<Hammer_Lover9000Entity> HAMMER_LOVER9000 = Registry.register(
+            Registry.ENTITY_TYPE, new Identifier(mccolosseum.MOD_ID, "hammer_lover9000"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Hammer_Lover9000Entity::new)
+                    .dimensions(EntityDimensions.fixed(1.2f, 2.75f)).build());
 }

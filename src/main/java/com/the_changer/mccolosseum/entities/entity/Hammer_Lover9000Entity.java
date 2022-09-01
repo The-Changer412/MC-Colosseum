@@ -4,7 +4,6 @@ import com.the_changer.mccolosseum.block.ModBlocks;
 import com.the_changer.mccolosseum.utli.RoundTwoThread;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -30,13 +29,12 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
-import java.util.UUID;
 
-public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
+public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
     public boolean attacked = false;
     public ServerBossBar BB = null;
-    public WeakWarriorEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
+    public Hammer_Lover9000Entity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         BB = new ServerBossBar(this.getName(), BossBar.Color.WHITE, BossBar.Style.PROGRESS);
     }
@@ -44,11 +42,11 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     //set the stats for the entity
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2f)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 140f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 12f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4f)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.5f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 200f);
     }
 
@@ -64,11 +62,11 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     //make the animation state machine for movement
     private <E extends IAnimatable> PlayState movePredicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.walk", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("hammer_lover9000.walk", true));
             event.getController().setAnimationSpeed(1.5f);
             attacked = false;
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("hammer_lover9000.idle", true));
             event.getController().setAnimationSpeed(1f);
         }
         return PlayState.CONTINUE;
@@ -83,7 +81,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
                 if (event.getController().getAnimationState() == AnimationState.Stopped) {
                     event.getController().markNeedsReload();
                 }
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("weak_warrior.attack", false));
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("hammer_lover9000.attack", false));
                 event.getController().setAnimationSpeed(1.85f);
                 attacked = true;
                 return PlayState.CONTINUE;
@@ -150,7 +148,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     public int getXpToDrop() {return  this.random.nextBetween(80, 100);}
 
     @Override
-    public void remove(Entity.RemovalReason reason) {
+    public void remove(RemovalReason reason) {
         super.remove(reason);
         //start the thread for the second round after the boss's death
         if (this.isDead() && !this.world.isClient) {

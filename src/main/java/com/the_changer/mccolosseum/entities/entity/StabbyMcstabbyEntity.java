@@ -1,6 +1,7 @@
 package com.the_changer.mccolosseum.entities.entity;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
+import com.the_changer.mccolosseum.utli.RoundThreeThread;
 import com.the_changer.mccolosseum.utli.RoundTwoThread;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -152,12 +153,9 @@ public class StabbyMcstabbyEntity extends PathAwareEntity implements IAnimatable
         super.remove(reason);
         //start the thread for the third round after the boss's death
         if (this.isDead() && !this.world.isClient) {
-//            PlayerEntity player = this.world.getClosestPlayer(this, 100);
-//            RoundTwoThread Thread = new RoundTwoThread(
-//                    player,
-//                    this.getServer().getWorld(this.world.getRegistryKey())
-//            );
-//            Thread.run();
+            PlayerEntity player = this.world.getClosestPlayer(this, 100);
+            RoundThreeThread Thread = new RoundThreeThread(player, this.getServer().getWorld(this.world.getRegistryKey()));
+            Thread.run();
         }
     }
 
