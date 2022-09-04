@@ -31,7 +31,9 @@ public class RoundThreeThread extends Thread {
             Thread.sleep(3000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: If the player can't be scared or stabbed to death, can the player be smashed to death?");
             Thread.sleep(3000);
-            UsefulFunctions.TalkToEveryone(player, "Announcer: Let's find out in 3...");
+            UsefulFunctions.TalkToEveryone(player, "Announcer: Hopefully, the next guy can scare the player so much, that they can't move around, and smash the player to death.");
+            Thread.sleep(6000);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: Let's find out if the next guy can do that in 3...");
             Thread.sleep(2000);
             player.sendMessage(Text.of("Announcer: 2..."), false);
             Thread.sleep(1000);

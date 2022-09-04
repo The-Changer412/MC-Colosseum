@@ -1,6 +1,7 @@
 package com.the_changer.mccolosseum.entities.entity;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
+import com.the_changer.mccolosseum.mccolosseum;
 import com.the_changer.mccolosseum.utli.RoundTwoThread;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,11 +31,11 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
-import java.util.UUID;
 
 public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
     public boolean attacked = false;
+    public boolean CommandKill = false;
     public ServerBossBar BB = null;
     public WeakWarriorEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -114,10 +115,12 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     @Override
     public void tick() {
         super.tick();
+        mccolosseum.WeakWarriorUUID = this.uuid;
 
         //set the boss bar of the boss
         if (!this.world.isClient) {
             if (!this.dead) {
+                mccolosseum.ColosseumBossAlive = true;
                 //only let ppl close to the boss see the health bar
                 List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
                 for (ServerPlayerEntity player : Players) {
@@ -135,6 +138,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
                 BB.setVisible(true);
             } else {
                 BB.clearPlayers();
+                mccolosseum.ColosseumBossAlive = false;
             }
         }
 
@@ -149,11 +153,21 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     @Override
     public int getXpToDrop() {return  this.random.nextBetween(80, 100);}
 
+    //check if the entity was kill my command
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (source.isOutOfWorld()) {
+            CommandKill = true;
+        }
+        return super.damage(source, amount);
+    }
+
     @Override
     public void remove(Entity.RemovalReason reason) {
+        mccolosseum.WeakWarriorUUID = null;
         super.remove(reason);
         //start the thread for the second round after the boss's death
-        if (this.isDead() && !this.world.isClient) {
+        if (this.isDead() && !this.world.isClient && !CommandKill) {
             PlayerEntity player = this.world.getClosestPlayer(this, 100);
             RoundTwoThread Thread = new RoundTwoThread(player, this.getServer().getWorld(this.world.getRegistryKey()));
             Thread.run();

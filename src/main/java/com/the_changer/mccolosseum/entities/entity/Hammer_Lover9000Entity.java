@@ -1,7 +1,7 @@
 package com.the_changer.mccolosseum.entities.entity;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
-import com.the_changer.mccolosseum.utli.RoundTwoThread;
+import com.the_changer.mccolosseum.mccolosseum;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -11,6 +11,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,6 +35,7 @@ import java.util.List;
 public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
     public boolean attacked = false;
+    public boolean CommandKill = false;
     public ServerBossBar BB = null;
     public Hammer_Lover9000Entity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -44,9 +47,9 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 140f)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 12f)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 14.5f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.5f)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 2f)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 200f);
     }
 
@@ -77,7 +80,7 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
         PlayerEntity player = this.world.getClosestPlayer(this, 100);
         if (player != null) {
             double dis = this.getBlockPos().getSquaredDistance(player.getPos());
-            if (dis < 3.75 && !attacked) {
+            if (dis < 5 && !attacked) {
                 if (event.getController().getAnimationState() == AnimationState.Stopped) {
                     event.getController().markNeedsReload();
                 }
@@ -112,12 +115,22 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
     @Override
     public void tick() {
         super.tick();
+        mccolosseum.Hammer_Lover9000UUID = this.uuid;
 
-        //set the boss bar of the boss
+
         if (!this.world.isClient) {
+            List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
+            for (ServerPlayerEntity player : Players) {
+                double dis = this.getBlockPos().getSquaredDistance(player.getPos());
+                if (dis < 50) {
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 5, 1), this);
+                }
+            }
+
+            //set the boss bar of the boss
             if (!this.dead) {
+                mccolosseum.ColosseumBossAlive = true;
                 //only let ppl close to the boss see the health bar
-                List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
                 for (ServerPlayerEntity player : Players) {
                     double dis = this.getBlockPos().getSquaredDistance(player.getPos());
                     if (dis < 10000) {
@@ -133,6 +146,7 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
                 BB.setVisible(true);
             } else {
                 BB.clearPlayers();
+                mccolosseum.ColosseumBossAlive = false;
             }
         }
 
@@ -147,14 +161,24 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
     @Override
     public int getXpToDrop() {return  this.random.nextBetween(80, 100);}
 
+    //check if the entity was kill my command
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (source.isOutOfWorld()) {
+            CommandKill = true;
+        }
+        return super.damage(source, amount);
+    }
+
     @Override
     public void remove(RemovalReason reason) {
+
         super.remove(reason);
         //start the thread for the second round after the boss's death
-        if (this.isDead() && !this.world.isClient) {
+        if (this.isDead() && !this.world.isClient && !CommandKill) {
             PlayerEntity player = this.world.getClosestPlayer(this, 100);
-            RoundTwoThread Thread = new RoundTwoThread(player, this.getServer().getWorld(this.world.getRegistryKey()));
-            Thread.run();
+//            RoundThreeThread Thread = new RoundThreeThread(player, this.getServer().getWorld(this.world.getRegistryKey()));
+//            Thread.run();
         }
     }
 

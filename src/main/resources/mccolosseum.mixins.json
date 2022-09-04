@@ -4,6 +4,7 @@
   "package": "com.the_changer.mccolosseum.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ColosseumDeathFix"
   ],
   "client": [
     "Mixin"

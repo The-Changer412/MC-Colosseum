@@ -7,9 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
 
+import java.util.UUID;
+
 public class mccolosseum implements ModInitializer {
 	//save the mod id for easy access
 	public static final String MOD_ID = "mccolosseum";
+	public static boolean ColosseumBossAlive = false;
+	public static UUID WeakWarriorUUID;
+	public static UUID StabbyMcstabbyUUID;
+	public static UUID Hammer_Lover9000UUID;
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
@@ -21,6 +27,10 @@ public class mccolosseum implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+
+		WeakWarriorUUID = null;
+		StabbyMcstabbyUUID = null;
+		Hammer_Lover9000UUID = null;
 
 		LOGGER.info("Hello Fabric world");
 		//register the items blocks

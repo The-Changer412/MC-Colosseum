@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"weak_warrior.idle": {
+		"stabby_mcstabby.idle": {
 			"loop": true
 		},
 		"stabby_mcstabby.walk": {
