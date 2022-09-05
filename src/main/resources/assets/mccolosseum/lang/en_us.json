@@ -4,5 +4,12 @@
   "block.mccolosseum.colosseum_stripped_oak_wood_enemy": "Colosseum Stripped Oak Wood Enemy",
   "entity.mccolosseum.weakwarrior": "Weak Warrior",
   "entity.mccolosseum.stabbymcstabby": "Stabby Mcstabby",
-  "entity.mccolosseum.hammer_lover9000": "Hammer Lover9000"
+  "entity.mccolosseum.hammer_lover9000": "Hammer Lover9000",
+  "item.mccolosseum.strength_item": "Strength Item",
+  "item.mccolosseum.absorption_item": "Absorption Item",
+  "item.mccolosseum.fire_resistance_item": "Fire Resistance Item",
+  "item.mccolosseum.jump_boost_item": "Jump Boost Item",
+  "item.mccolosseum.regeneration_item": "Regeneration Item",
+  "item.mccolosseum.resistance_item": "Resistance Item",
+  "item.mccolosseum.speed_item": "Speed Item"
 }

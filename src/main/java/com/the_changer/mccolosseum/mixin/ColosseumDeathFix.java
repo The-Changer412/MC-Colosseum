@@ -14,7 +14,6 @@ public class ColosseumDeathFix {
 	@Inject(at = @At("TAIL"), method = "onDeath")
 	public void onDeath(DamageSource damageSource, CallbackInfo info) {
 		if (mccolosseum.ColosseumBossAlive) {
-
 			ServerWorld world = damageSource.getSource().getServer().getOverworld();
 			ServerPlayerEntity player = world.getPlayers().get(0);
 

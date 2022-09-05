@@ -1,6 +1,7 @@
 package com.the_changer.mccolosseum;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
+import com.the_changer.mccolosseum.item.ModItems;
 import com.the_changer.mccolosseum.utli.ModRegistries;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class mccolosseum implements ModInitializer {
 		LOGGER.info("Hello Fabric world");
 		//register the items blocks
 		ModBlocks.registerModBlocks();
+		ModItems.registerModItems();
 
 		//register the entites and the library that handles animations
 		ModRegistries.registerModStuffs();
