@@ -1,6 +1,6 @@
 package com.the_changer.mccolosseum.block;
 
-import com.the_changer.mccolosseum.utli.PlayerCDandTP;
+import com.the_changer.mccolosseum.utli.ButtonThread;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WoodenButtonBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,13 +31,13 @@ public class ColosseumButton extends WoodenButtonBlock {
                     player.sendMessage(Text.of("Empty everything inside your inventory and set your spawn point before pressing the button."), false);
                 } else {
                     //prepare the player that the fights will start soon.
-                    player.sendMessage(Text.of("DON'T MOVE A MUSCLE. The fight will start soon, and moving could cause you to miss the opportunity to fight."), false);
-                    player.sendMessage(Text.of("Also, Don't try to smuggle a item into the fight. You will lose the item."), false);
+                    player.sendMessage(Text.of("DON'T LEAVE THIS AREA!!! The fight will start soon, and leaving this area could cause you to miss the opportunity to fight."), false);
+                    player.sendMessage(Text.of("Also, Don't try to smuggle items into the fight. You will lose items."), false);
                     //jammed the button, so it can't be pressed again.
                     world.setBlockState(pos, state.with(ColosseumButton.POWERED, true), NOTIFY_ALL);
 
                     //start the countdown for the fight
-                    PlayerCDandTP thread = new PlayerCDandTP(player, world);
+                    ButtonThread thread = new ButtonThread(player, world);
                     thread.start();
                 }
                 return ActionResult.CONSUME;

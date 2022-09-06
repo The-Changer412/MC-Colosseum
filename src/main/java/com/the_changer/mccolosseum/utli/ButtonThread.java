@@ -4,29 +4,36 @@ import com.the_changer.mccolosseum.block.ModBlocks;
 import com.the_changer.mccolosseum.entities.ModEntities;
 import com.the_changer.mccolosseum.mccolosseum;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 //the thread that will do the countdown and teleport the player inside the event
-public class PlayerCDandTP extends Thread {
+public class ButtonThread extends Thread {
     //save the player and world that is pass through
     PlayerEntity player;
     World world;
     int BlockCheckRange = 40;
     boolean found = false;
 
-    public PlayerCDandTP(PlayerEntity Player, World World) {
+    public ButtonThread(PlayerEntity Player, World World) {
         player = Player;
         world = World;
     }
 
     public void run() {
         try {
+            SpectatorsSpawnThread thread = new SpectatorsSpawnThread(player, world);
+            thread.run();
+
             int range = 1500;
             //make the announcer talk to the player
             Thread.sleep(3000);
@@ -45,7 +52,7 @@ public class PlayerCDandTP extends Thread {
             UsefulFunctions.TalkToEveryone(player, "Announcer: 1...");
             Thread.sleep(1000);
 
-
+            //spawn in the boss
             BlockCheckRange = 120;
             found = false;
             for (int x = player.getBlockX() - BlockCheckRange; x < player.getBlockX() + BlockCheckRange; x++) {
