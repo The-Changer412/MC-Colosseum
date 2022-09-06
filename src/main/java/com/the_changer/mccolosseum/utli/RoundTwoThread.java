@@ -42,9 +42,9 @@ public class RoundTwoThread extends Thread {
             Thread.sleep(2000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: Anyway, Let the next fight begin in 3...");
             Thread.sleep(2000);
-            player.sendMessage(Text.of("Announcer: 2..."), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: 2...");
             Thread.sleep(1000);
-            player.sendMessage(Text.of("Announcer: 1..."), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: 1...");
             Thread.sleep(1000);
 
             int BlockCheckRange = 120;

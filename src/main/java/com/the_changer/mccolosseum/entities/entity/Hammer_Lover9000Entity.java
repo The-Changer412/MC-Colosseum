@@ -2,6 +2,7 @@ package com.the_changer.mccolosseum.entities.entity;
 
 import com.the_changer.mccolosseum.block.ModBlocks;
 import com.the_changer.mccolosseum.mccolosseum;
+import com.the_changer.mccolosseum.utli.WinnerThread;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -177,8 +178,8 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
         //start the thread for the second round after the boss's death
         if (this.isDead() && !this.world.isClient && !CommandKill) {
             PlayerEntity player = this.world.getClosestPlayer(this, 100);
-//            RoundThreeThread Thread = new RoundThreeThread(player, this.getServer().getWorld(this.world.getRegistryKey()));
-//            Thread.run();
+            WinnerThread Thread = new WinnerThread(player, this.getServer().getWorld(this.world.getRegistryKey()));
+            Thread.run();
         }
     }
 

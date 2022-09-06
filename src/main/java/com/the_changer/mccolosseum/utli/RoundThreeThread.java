@@ -35,9 +35,9 @@ public class RoundThreeThread extends Thread {
             Thread.sleep(6000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: Let's find out if the next guy can do that in 3...");
             Thread.sleep(2000);
-            player.sendMessage(Text.of("Announcer: 2..."), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: 2...");
             Thread.sleep(1000);
-            player.sendMessage(Text.of("Announcer: 1..."), false);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: 1...");
             Thread.sleep(1000);
 
             int BlockCheckRange = 120;
