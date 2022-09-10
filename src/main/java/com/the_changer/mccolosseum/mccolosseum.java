@@ -3,7 +3,6 @@ package com.the_changer.mccolosseum;
 import com.the_changer.mccolosseum.block.ModBlocks;
 import com.the_changer.mccolosseum.item.ModItems;
 import com.the_changer.mccolosseum.utli.ModRegistries;
-import com.the_changer.mccolosseum.world.STStructures;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +41,5 @@ public class mccolosseum implements ModInitializer {
 		//register the entites and the library that handles animations
 		ModRegistries.registerModStuffs();
 		GeckoLib.initialize();
-
-		STStructures.registerStructureFeatures();
 	}
 }

@@ -123,8 +123,9 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
             List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
             for (ServerPlayerEntity player : Players) {
                 double dis = this.getBlockPos().getSquaredDistance(player.getPos());
-                if (dis < 50) {
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 5, 1), this);
+                if (dis < 50 && !player.isCreative() && !player.isSpectator()) {
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 2, 1), this);
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 2, 1), this);
                 }
             }
 
