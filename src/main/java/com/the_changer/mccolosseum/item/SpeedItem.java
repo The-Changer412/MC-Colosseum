@@ -13,6 +13,7 @@ public class SpeedItem extends Item {
         super(settings);
     }
 
+    //give the player the effect when holding the item in their inventory
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (!world.isClient) {

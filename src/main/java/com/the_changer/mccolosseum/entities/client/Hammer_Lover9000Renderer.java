@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class Hammer_Lover9000Renderer extends GeoEntityRenderer<Hammer_Lover9000Entity> {
+    //create the model of the entity
     public Hammer_Lover9000Renderer(EntityRendererFactory.Context ctx) {
 
         super(ctx, new Hammer_Lover9000Model());

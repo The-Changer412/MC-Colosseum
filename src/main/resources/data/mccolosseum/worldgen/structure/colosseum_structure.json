@@ -7,7 +7,6 @@
 
   // This will add land around the bottom of the structure. (Based on the starting piece's y value)
   // The kinds of values allowed here are: none, beard_thin, beard_box, and bury
-  // If no land change is deseried, removed this field entirely.
   "terrain_adaptation": "bury",
 
   // Keep this false. This is only for vanilla legacy villages to make it spawn properly. We don't need no hacks here!

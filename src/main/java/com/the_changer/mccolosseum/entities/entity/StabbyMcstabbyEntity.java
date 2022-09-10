@@ -63,6 +63,7 @@ public class StabbyMcstabbyEntity extends PathAwareEntity implements IAnimatable
 
     //make the animation state machine for movement
     private <E extends IAnimatable> PlayState movePredicate(AnimationEvent<E> event) {
+        //check if the entity is close enough to attack
         if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("stabby_mcstabby.walk", true));
             event.getController().setAnimationSpeed(1.5f);
@@ -151,7 +152,7 @@ public class StabbyMcstabbyEntity extends PathAwareEntity implements IAnimatable
     @Override
     public int getXpToDrop() {return  this.random.nextBetween(100, 120);}
 
-    //check if the entity was kill my command
+    //check if the entity was killed by command
     @Override
     public boolean damage(DamageSource source, float amount) {
         if (source.isOutOfWorld()) {
@@ -164,7 +165,7 @@ public class StabbyMcstabbyEntity extends PathAwareEntity implements IAnimatable
     public void remove(RemovalReason reason) {
         mccolosseum.StabbyMcstabbyUUID = null;
         super.remove(reason);
-//        start the thread for the third round after the boss's death
+//        start the thread for the third round after the boss's death as long as he wasn't killed by the command
         if (this.isDead() && !this.world.isClient && !CommandKill) {
             PlayerEntity player = this.world.getClosestPlayer(this, 100);
             RoundThreeThread Thread = new RoundThreeThread(player, this.getServer().getWorld(this.world.getRegistryKey()));

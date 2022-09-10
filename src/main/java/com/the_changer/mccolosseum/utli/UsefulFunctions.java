@@ -7,7 +7,7 @@ import net.minecraft.text.Text;
 import java.util.List;
 
 public class UsefulFunctions {
-    //function that will talk to everyone in a certain range
+    //function that will talk to everyone
     public static void TalkToEveryone(PlayerEntity player, String msg){
         List<ServerPlayerEntity> Players = player.getServer().getPlayerManager().getPlayerList();
         for (ServerPlayerEntity OtherPlayer : Players) {

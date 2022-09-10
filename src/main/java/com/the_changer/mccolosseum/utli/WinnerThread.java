@@ -37,8 +37,8 @@ public class WinnerThread extends Thread {
             Thread.sleep(2000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: But first, this colosseum is going to have to shutdown due to the fact that the player has killed all of our opponents.");
             Thread.sleep(5000);
-            UsefulFunctions.TalkToEveryone(player, "Announcer: But don't worry people, we have many more colosseums for you to go to.");
-            Thread.sleep(3000);
+            UsefulFunctions.TalkToEveryone(player, "Announcer: But don't worry people, we have many more colosseums for you to watch, and for the player to get different types of rewards at.");
+            Thread.sleep(5000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: Now, here's your reward.");
             Thread.sleep(1000);
 

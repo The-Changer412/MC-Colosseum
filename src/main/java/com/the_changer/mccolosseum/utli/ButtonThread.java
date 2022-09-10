@@ -31,10 +31,11 @@ public class ButtonThread extends Thread {
 
     public void run() {
         try {
+            //spawn in the spectators
             SpectatorsSpawnThread thread = new SpectatorsSpawnThread(player, world);
             thread.run();
 
-            int range = 1500;
+
             //make the announcer talk to the player
             Thread.sleep(3000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: Welcome to today's fight.");
@@ -93,11 +94,9 @@ public class ButtonThread extends Thread {
                             player.getInventory().armor.set(1, new ItemStack(Items.LEATHER_LEGGINGS));
                             player.getInventory().armor.set(0, new ItemStack(Items.LEATHER_BOOTS));
 
+                            //set the player to max hp
                             player.clearStatusEffects();
                             player.heal(30);
-                            player.getHungerManager().setFoodLevel(30);
-                            player.getHungerManager().setSaturationLevel(30);
-                            player.getHungerManager().setFoodLevel(30);
 
                             UsefulFunctions.TalkToEveryone(player, "Announcer: FIGHT!!!");
                             found = true;

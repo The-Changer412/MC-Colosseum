@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
-    //create the block
+    //create the blocks
     public static final Block Colosseum_Button = registerBlock("colosseum_button",
             new ColosseumButton(FabricBlockSettings.of(Material.DECORATION)
                     .strength(9999999999999999f, 9999999999999999f).requiresTool().noCollision()), null);

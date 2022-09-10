@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class StabbyMcstabbyRenderer extends GeoEntityRenderer<StabbyMcstabbyEntity> {
+    //create the model
     public StabbyMcstabbyRenderer(EntityRendererFactory.Context ctx) {
 
         super(ctx, new StabbyMcStabbyModel());

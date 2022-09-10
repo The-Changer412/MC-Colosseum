@@ -23,7 +23,7 @@ public class RoundThreeThread extends Thread {
 
     public void run() {
         try {
-            int range = 150;
+            //talk to the players
             Thread.sleep(1000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: And Stabby is down.");
             Thread.sleep(1000);
@@ -40,6 +40,7 @@ public class RoundThreeThread extends Thread {
             UsefulFunctions.TalkToEveryone(player, "Announcer: 1...");
             Thread.sleep(1000);
 
+            //spawn in the boss
             int BlockCheckRange = 120;
             boolean found = false;
             for (int x = player.getBlockX() - BlockCheckRange; x < player.getBlockX() + BlockCheckRange; x++) {
@@ -68,11 +69,9 @@ public class RoundThreeThread extends Thread {
             player.getInventory().armor.set(1, new ItemStack(Items.DIAMOND_LEGGINGS));
             player.getInventory().armor.set(0, new ItemStack(Items.DIAMOND_BOOTS));
 
+            //set the player to max hp
             player.clearStatusEffects();
             player.heal(30);
-            player.getHungerManager().setFoodLevel(30);
-            player.getHungerManager().setSaturationLevel(30);
-            player.getHungerManager().setFoodLevel(30);
 
             UsefulFunctions.TalkToEveryone(player, "Announcer: FIGHT!!!");
 

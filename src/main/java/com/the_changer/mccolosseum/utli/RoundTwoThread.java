@@ -26,7 +26,7 @@ public class RoundTwoThread extends Thread {
 
     public void run() {
         try {
-            int range = 150;
+            //talk to the players
             Thread.sleep(1000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: And the warrior is down.");
             Thread.sleep(1000);
@@ -75,11 +75,9 @@ public class RoundTwoThread extends Thread {
             player.getInventory().armor.set(1, new ItemStack(Items.CHAINMAIL_LEGGINGS));
             player.getInventory().armor.set(0, new ItemStack(Items.CHAINMAIL_BOOTS));
 
+            //set the player to max hp
             player.clearStatusEffects();
             player.heal(30);
-            player.getHungerManager().setFoodLevel(30);
-            player.getHungerManager().setSaturationLevel(30);
-            player.getHungerManager().setFoodLevel(30);
 
             UsefulFunctions.TalkToEveryone(player, "Announcer: FIGHT!!!");
 

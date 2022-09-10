@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModItems {
+    //register the items
     public static final Item Strength_Item = registerItem("strength_item",
             new StrengthItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item Absorption_Item = registerItem("absorption_item",
@@ -23,10 +24,12 @@ public class ModItems {
     public static final Item Speed_Item = registerItem("speed_item",
             new SpeedItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
 
+    //function to register the items
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(mccolosseum.MOD_ID, name), item);
     }
 
+    //register the item to the mod
     public static void registerModItems() {
         mccolosseum.LOGGER.debug("Registering Mod Items for " + mccolosseum.MOD_ID);
     }

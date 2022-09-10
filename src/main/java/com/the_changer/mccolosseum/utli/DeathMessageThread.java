@@ -17,10 +17,12 @@ public class DeathMessageThread extends Thread {
         try {
 
             Thread.sleep(3000);
+            //kill the boss
             if ( mccolosseum.WeakWarriorUUID != null) {world.getEntity(mccolosseum.WeakWarriorUUID).kill();}
             if ( mccolosseum.StabbyMcstabbyUUID != null) {world.getEntity(mccolosseum.StabbyMcstabbyUUID).kill();}
             if ( mccolosseum.Hammer_Lover9000UUID != null) {world.getEntity(mccolosseum.Hammer_Lover9000UUID).kill();}
 
+            //talk to the players
             UsefulFunctions.TalkToEveryone(player, "Announcer: And the player is down.");
             Thread.sleep(1000);
             UsefulFunctions.TalkToEveryone(player, "Announcer: Turns out, the player isn't as strong as we thought he is.");

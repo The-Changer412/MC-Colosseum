@@ -35,7 +35,7 @@ public class SpectatorsSpawnThread extends Thread {
                     if (block == Blocks.SMOOTH_SANDSTONE_STAIRS) {
                         if (Random.create().nextInt(7) == 0) {
 
-                            switch (Random.createLocal().nextInt(5)) {
+                            switch (Random.createLocal().nextInt(7)) {
                                 case 0, 1, 2, 3:
                                     VillagerEntity villager = EntityType.VILLAGER.spawn(this.world.getServer().getWorld(this.world.getRegistryKey()), null, null, null, new BlockPos(x, y + 1, z), SpawnReason.TRIGGERED, true, true);
 

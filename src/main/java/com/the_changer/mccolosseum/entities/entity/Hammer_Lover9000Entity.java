@@ -34,6 +34,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.List;
 
 public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatable {
+    //create the variables
     private AnimationFactory factory = new AnimationFactory(this);
     public boolean attacked = false;
     public boolean CommandKill = false;
@@ -78,6 +79,7 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
 
     //make the animation state machine for attacks
     private <E extends IAnimatable> PlayState attackPredicate(AnimationEvent<E> event) {
+        //check if the entity is close enough to attack
         PlayerEntity player = this.world.getClosestPlayer(this, 100);
         if (player != null) {
             double dis = this.getBlockPos().getSquaredDistance(player.getPos());
@@ -118,14 +120,13 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
         super.tick();
         mccolosseum.Hammer_Lover9000UUID = this.uuid;
 
-
+        //slow down any nearby players
         if (!this.world.isClient) {
             List<ServerPlayerEntity> Players = this.getServer().getPlayerManager().getPlayerList();
             for (ServerPlayerEntity player : Players) {
                 double dis = this.getBlockPos().getSquaredDistance(player.getPos());
                 if (dis < 50 && !player.isCreative() && !player.isSpectator()) {
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 2, 1), this);
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 2, 1), this);
                 }
             }
 
@@ -161,9 +162,9 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
 
     //set the amount of xp it drops
     @Override
-    public int getXpToDrop() {return  this.random.nextBetween(80, 100);}
+    public int getXpToDrop() {return  this.random.nextBetween(130, 180);}
 
-    //check if the entity was kill my command
+    //check if the entity was killed by command
     @Override
     public boolean damage(DamageSource source, float amount) {
         if (source.isOutOfWorld()) {
@@ -176,7 +177,7 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
     public void remove(RemovalReason reason) {
 
         super.remove(reason);
-        //start the thread for the second round after the boss's death
+        //start the thread for the winner round after the boss's death as long as he wasn't killed by the command
         if (this.isDead() && !this.world.isClient && !CommandKill) {
             PlayerEntity player = this.world.getClosestPlayer(this, 100);
             WinnerThread Thread = new WinnerThread(player, this.getServer().getWorld(this.world.getRegistryKey()));

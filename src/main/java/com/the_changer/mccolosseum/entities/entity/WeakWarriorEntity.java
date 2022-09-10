@@ -77,6 +77,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
 
     //make the animation state machine for attacks
     private <E extends IAnimatable> PlayState attackPredicate(AnimationEvent<E> event) {
+        //check if the entity is close enough to attack
         PlayerEntity player = this.world.getClosestPlayer(this, 100);
         if (player != null) {
             double dis = this.getBlockPos().getSquaredDistance(player.getPos());
@@ -166,7 +167,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     public void remove(Entity.RemovalReason reason) {
         mccolosseum.WeakWarriorUUID = null;
         super.remove(reason);
-        //start the thread for the second round after the boss's death
+        //start the thread for the second round after the boss's death as long as he wasn't killed by the command
         if (this.isDead() && !this.world.isClient && !CommandKill) {
             PlayerEntity player = this.world.getClosestPlayer(this, 100);
             RoundTwoThread Thread = new RoundTwoThread(player, this.getServer().getWorld(this.world.getRegistryKey()));

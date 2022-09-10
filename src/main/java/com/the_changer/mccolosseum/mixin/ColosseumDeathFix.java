@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ColosseumDeathFix {
 	@Inject(at = @At("TAIL"), method = "onDeath")
 	public void onDeath(DamageSource damageSource, CallbackInfo info) {
+		//check if any colosseum boss was alive when the player dies
 		if (mccolosseum.ColosseumBossAlive) {
 			ServerWorld world = damageSource.getSource().getServer().getOverworld();
 			ServerPlayerEntity player = world.getPlayers().get(0);

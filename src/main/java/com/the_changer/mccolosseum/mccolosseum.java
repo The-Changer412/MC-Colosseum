@@ -13,6 +13,7 @@ import java.util.UUID;
 public class mccolosseum implements ModInitializer {
 	//save the mod id for easy access
 	public static final String MOD_ID = "mccolosseum";
+	//global variables
 	public static boolean ColosseumBossAlive = false;
 	public static UUID WeakWarriorUUID;
 	public static UUID StabbyMcstabbyUUID;
@@ -34,11 +35,11 @@ public class mccolosseum implements ModInitializer {
 		Hammer_Lover9000UUID = null;
 
 		LOGGER.info("Hello Fabric world");
-		//register the items blocks
+		//register the blocks and items
 		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();
 
-		//register the entites and the library that handles animations
+		//register the entities and the library that handles animations
 		ModRegistries.registerModStuffs();
 		GeckoLib.initialize();
 	}

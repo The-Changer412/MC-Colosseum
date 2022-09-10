@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 public class WeakWarriorRenderer extends GeoEntityRenderer<WeakWarriorEntity> {
+    //create the model
     public WeakWarriorRenderer(EntityRendererFactory.Context ctx) {
 
         super(ctx, new WeakWarriorModel());
