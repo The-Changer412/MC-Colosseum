@@ -48,7 +48,7 @@ public class Hammer_Lover9000Entity extends PathAwareEntity implements IAnimatab
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 140f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.18f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 14.5f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 2f)

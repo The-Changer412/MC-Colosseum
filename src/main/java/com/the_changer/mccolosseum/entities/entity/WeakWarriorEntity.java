@@ -46,7 +46,7 @@ public class WeakWarriorEntity extends PathAwareEntity implements IAnimatable {
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.32f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.36f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.1f)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4f)

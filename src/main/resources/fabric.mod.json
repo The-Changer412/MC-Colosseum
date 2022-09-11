@@ -4,13 +4,13 @@
   "version": "${version}",
 
   "name": "Minecraft Colosseum",
-  "description": "This is a Minecraft 1.19 mod that adds in Colosseums structures where you can test your strength against bosses in front of a crowd for a reward.",
+  "description": "This is a fabric 1.19 mod generate colosseum for you to fight three bosses in front of a crowd for rewards.",
   "authors": [
     "The Changer"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/The-Changer412/MC-Colosseum",
+    "sources": "https://github.com/The-Changer412/MC-Colosseum"
   },
 
   "license": "GPL-3.0 License",
