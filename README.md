@@ -2,7 +2,7 @@
 This is a fabric 1.19 mod generate colosseum for you to fight three bosses in front of a crowd for rewards.
 
 # Installation
-You can download the mod from [Modrinth](https://modrinth.com/mod/minecraft-colosseum), [Curseforge](https://www.curseforge.com/minecraft/mc-mods/minecraft-colosseum), or the [release tab](https://github.com/The-Changer412/MC-Colosseum/releases/tag/release).
+You can download the mod from [Modrinth](https://modrinth.com/mod/minecraft-colosseum), or the [release tab](https://github.com/The-Changer412/MC-Colosseum/releases/tag/release).
 
 # Requirements
 This mod requires the [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) and the [Geckolib 3.1.6+](https://www.curseforge.com/minecraft/mc-mods/geckolib)
